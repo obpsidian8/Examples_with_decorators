@@ -35,3 +35,18 @@ def function_modder(originalFunction):
 # The original object, the one which is going to be modified, is passed to a decorator as an argument.
 def food(x):
     print(f"Function: Food. Paramater passed: {x}")
+
+ def memoize(originalFunction):
+    memo = {}
+
+    def modifiedFunction(x):
+        if x not in memo:
+            # NO SAVED RESULTS FOR RUNNING THE ORIGINAL FUNCTION WITH THIS PARAMETER X
+            # SAVE PARAMETER AND RESULT OF RUNNING THE ORIGINAL FUNCTION WITH THIS PARAMETER AS A KEY VALUE PAIR
+            memo[x] = originalFunction(x)
+
+        # MODIFIED FUNCTION RETURNS WHAT ORIGINAL FUNCTION WOULD HAVE RETURNED
+        return memo[x]
+
+    # HERE, WE RETURN A MODIFIED VERSION OF THE ORIGINAL FUNCTION
+    return modifiedFunction
